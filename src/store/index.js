@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import {getMusicLyric} from '@/request/api/item'
+import {getPhoneLogin} from '@/request/api/home'
 
 const musicList={
   namespaced:true,
@@ -72,8 +73,28 @@ const musicList={
 }
 
 const User={
-  isLogin:false,   //判断是否登录
-  showFooter:true
+  namespaced:true,
+  state:{
+    isLogin:false,   //判断是否登录
+    showFooter:true,
+    user:{
+      
+    }
+  },
+  mutations:{
+    updateIsLogin(state,value){
+      state.isLogin=!state.isLogin
+    },
+    updateUser(state,value){
+      state.user=value
+    }
+  },
+  actions:{
+    getLogin:async function (context,val){
+      let res=await getPhoneLogin(val);
+      return res;
+    }
+  }
 }
 
 export default createStore({

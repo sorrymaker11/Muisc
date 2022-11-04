@@ -1,6 +1,7 @@
 <template>
     <div class="itemMusicList">
-        <div>
+        <div v-if="!itemList.length">加载中！！！！！！！！！！！！！！！！！！！！</div>
+        <div v-else>
         <div class="itemListTop">
             <div class="topLeft">
                 <div>
@@ -42,6 +43,7 @@
 
 <script>
 import { mapMutations } from 'vuex'
+import {getSubscribe} from '@/request/api/home'
 export default{
     setup(props){
         function changeCount(num){
@@ -57,9 +59,8 @@ export default{
         palyMusic(index){
             this.updatePlayList(this.itemList);
             this.updatePlayListIndex(index)
-            
         },
-        ...mapMutations(['updatePlayList','updatePlayListIndex']),
+        ...mapMutations('musicList',['updatePlayList','updatePlayListIndex']),
     }
 }
 </script>

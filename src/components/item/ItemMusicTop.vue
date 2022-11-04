@@ -122,7 +122,7 @@ export default{
     .content{
         width: 100%;
         display: flex;
-        margin:1.2rem 0 .2rem;
+        margin:.2rem 0 .2rem;
         color: rgb(238,179,55);
     }
     .content .icon{

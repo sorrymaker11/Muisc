@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img v-lazy="musicList.al.picUrl" alt="" class="bgimg">
+        <img :src="musicList.al.picUrl" alt="" class="bgimg">
         <div class="detailTop">
             <div class="detailTopLeft">
                 <svg class="icon" aria-hidden="true" @click="updateDetailShow">

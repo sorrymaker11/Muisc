@@ -6,10 +6,10 @@
             </svg>
         </div>
         <div class="topContent">
-            <span @click="$router.push('/infoUser')">我的</span>
-            <span class="active">发现</span>
+            <router-link active-class="active" to='/infoUser'>我的</router-link>
+            <router-link active-class="active" to="/">发现</router-link>
             <span>云村</span>
-            <span>视频</span>
+            <router-link active-class="active" to='/video'>视频</router-link>
         </div>
         <div class="topright">
             <svg class="icon" aria-hidden="true" @click="$router.push('/search')">
@@ -35,6 +35,9 @@
         justify-content: space-around;
         align-items: center;
         font-size: .3rem;
+    }
+    .topContent a{
+        color: rgb(239,179,54);
     }
     .active{
         font-weight: 700;

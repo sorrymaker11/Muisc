@@ -41,11 +41,28 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "itemMusic" */ '../views/Login.vue')
   },
+  
+  {
+    path: '/video',
+    name: 'video',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "itemMusic" */ '../views/video.vue')
+  },
+  {
+    path: '/videodetail/:id',
+    name: 'videodetail',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "itemMusic" */ '../views/videoDetail.vue')
+  },
   {
     path: '/infoUser',
     name: 'InfoUser',
     beforeEnter(to, from, next) {
-      if(store.state.User.isLogin){
+      if(store.state.User.isLogin ||localStorage.getItem('token')){
         next();
       }else{
         next('/login')

@@ -8,7 +8,8 @@
                 <img :src="playList[playListIndex].al.picUrl" alt="">
                 <div>
                     <p>{{playList[playListIndex].name}}</p>
-                    <span>横滑切换上下首哦~</span>
+
+                    <span v-for="item in playList[playListIndex].ar" :key="item.id">{{item.name}}</span>
                 </div>
             </div>
             <div class="footRight">
@@ -18,11 +19,39 @@
                 <svg class="icon" aria-hidden="true" v-else @click="play">
                     <use xlink:href="#icon-zanting"></use>
                 </svg>
-                <svg class="icon" aria-hidden="true">
+                <svg class="icon" aria-hidden="true" @click="toShowList">
                     <use xlink:href="#icon-liebiao2"></use>
                 </svg>
             </div>
             <audio ref="audio" :src="`https://music.163.com/song/media/outer/url?id=${playList[playListIndex].id}.mp3`"></audio>
+            <van-popup
+                v-model:show="showList"
+                round
+                position="bottom"
+                :style="{ height: '50%',width:'90%',bottom:'1.5rem',left:'5%',borderRadius:'.4rem',overflow:'scroll'}"
+            >
+                    <div class="itemListContent">
+                        <div class="content" v-for="(item,index) in playList" :key='index'>
+                            <div class="contentLeft" @click="palyMusic(index)">
+                                <span>{{index+1}}</span>
+                                <div>
+                                    <h5>{{item.name}}</h5>
+                                    <div class="autor">
+                                        <span v-for="autor in item.ar" :key="autor.id">{{autor.name}} &nbsp;</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="contentRight">
+                                <svg class="icon mv" aria-hidden="true" v-if="item.mv!=0">
+                                    <use xlink:href="#icon-w"></use>
+                                </svg>
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-liebiao2"></use>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+            </van-popup>
             <van-popup v-model:show="detailShow" position="right" :style="{ height: '100%',width:'100%' }">
                 <MusicDetailVue 
                     :musicList='playList[playListIndex]' 
@@ -41,7 +70,8 @@ import MusicDetailVue from '@/components/musicFooter/MusicDetail.vue'
 export default{ 
     data(){
         return{
-            interVal:null
+            interVal:null,
+            showList:false
         }
     },
     computed:{
@@ -80,7 +110,14 @@ export default{
                 this.updateCurrentTime(this.$refs.audio.currentTime)
             },1000)
         }, 
-    ...mapMutations('musicList',
+        toShowList(){
+            this.showList=true
+        },
+        
+        palyMusic(index){
+            this.updatePlayListIndex(index)
+        },
+        ...mapMutations('musicList',
                     ['updateIsbtnShow',
                     'updateDetailShow',
                     'updatePlayList',
@@ -178,4 +215,49 @@ img{
     justify-content: space-around;
     align-items: center;
 }
+.van-popup--bottom{
+    bottom:2rem !important;
+}
+.itemListContent{
+    width: 100%;
+}
+.content{
+    width: 100%;
+    height: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+.contentLeft{
+    width: 60%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.contentLeft>div{
+    margin-left:.2rem;
+}
+.contentLeft div h5{
+    display: -webkit-box;
+    /*设置弹性盒模型子元素的排列方式*/
+    -webkit-box-orient: vertical;
+    /*限制文本行数*/
+    -webkit-line-clamp: 1;
+    /* 溢出隐藏 */
+    overflow: hidden;
+}
+.autor{
+    font-size: .25rem;
+    color: gray;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+}
+.contentRight{
+    display: flex;
+    align-items: center;
+}
+.mv{
+    margin-right: .3rem;
+}   
 </style>

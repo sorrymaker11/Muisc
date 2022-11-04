@@ -1,8 +1,5 @@
 <template>
   <div>
-    <svg class="icon top" aria-hidden="true"  @click="$router.go(-1)">
-        <use xlink:href="#icon-jiantou_xiangzuo"></use>
-    </svg>
     <div class="login">
       <h2 class="title">欢迎登录</h2>
       <div class="loginContent">
@@ -17,7 +14,7 @@
                   <use xlink:href="#icon-shouji"></use>
               </svg>
             </div>
-            <input type="text" name="phone" placeholder="请输入手机号码">
+            <input type="text" name="phone" placeholder="请输入手机号码" v-model="phone">
           </div>
           <div class="getInput">
             <div>
@@ -25,9 +22,9 @@
                   <use xlink:href="#icon-mima"></use>
               </svg>
             </div>
-            <input type="password" name="password" placeholder="请输入密码">
+            <input type="password" name="password" placeholder="请输入密码" v-model="password">
           </div>
-          <button>登录</button>
+          <button @click="Login">登录</button>
         </div>
         <div class="loginFooter">
           <input type="checkbox" id="remember">
@@ -35,12 +32,38 @@
         </div>
       </div>
     </div>
+    
   </div>
 </template>
 
 
 <script>
-
+import {getLoginUser} from '@/request/api/home';
+export default{
+  data(){
+    return{
+      phone:'',
+      password:"",
+    }
+  },
+  methods:{
+    Login:async function(){
+      let res=await this.$store.dispatch('User/getLogin',{phone:this.phone,password:this.password})
+      console.log(res);
+      if(res.data.code===200){
+        this.$store.commit('User/updateIsLogin')
+        localStorage.setItem('token',res.data.token)
+        let result=await getLoginUser(res.data.account.id)
+        sessionStorage.setItem('user',JSON.stringify(result.data))
+        this.$store.commit('User/updateUser',result.data)
+        this.$router.push('/infoUser')
+      }else{
+        alert(res.data.msg);
+        this.password=''
+      }
+    }
+  },
+}
 </script>
 
 <style scoped>
