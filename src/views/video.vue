@@ -1,11 +1,12 @@
 <template>
     <div class="allVideo">
-        <div v-for="item in data" :key="item.id" class="content" @click="goDetail(item.id)">
-            <div class="bacImg"><img :src="item.cover" alt="图片加载失败"></div>
-            <div class="desc">{{item.mv.desc}}</div>
+        <videoTop :getMvData="getMvData"/>
+        <div v-for="item in data" :key="item.id" class="content" @click="goDetail(item.id,item.name)">
+            <div class="bacImg"><img v-lazy="item.cover" alt="图片加载失败"></div>
+            <div class="desc">{{item.briefDesc||'暂无描述'}}</div>
             <div class="footer">
                 <div class="footerLeft">
-                    <img :src="item.cover" alt="">
+                    <img v-lazy="item.cover" alt="">
                     <span class="name">{{item.name}}</span>
                 </div>
                 <div class="footerRight">
@@ -18,31 +19,34 @@
 
 <script>
 import {getMv} from '@/request/api/video';
+import videoTop from '@/components/video/videoTop.vue'
 export default{
     data(){
         return{
             data:null
         }
     },
-    mounted(){
-        this.getMvData()
-    },
     methods:{
-        getMvData:async function(){
-            let res=await getMv()
+        getMvData:async function(area){
+            let res=await getMv(area)
             this.data=res.data.data
-            console.log(res);
+            // console.log(res);
             console.log(this.data);
         },
-        goDetail(id){
+        goDetail(id,name){
             this.$router.push({
                 name:'videodetail',
                 params:{
-                    id
+                    id,
+                    name
                 }
             })
         }
-    }
+    },
+    mounted(){
+        this.getMvData('全部')
+    },
+    components:{videoTop}
 }
 </script>
 

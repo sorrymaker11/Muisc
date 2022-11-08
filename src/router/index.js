@@ -48,15 +48,16 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "itemMusic" */ '../views/video.vue')
+    component: () => import(/* webpackChunkName: "itemMusic" */ '../views/video.vue'),
+    childern:[]
   },
   {
-    path: '/videodetail/:id',
+    path: '/videodetail/:id/:name',
     name: 'videodetail',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "itemMusic" */ '../views/videoDetail.vue')
+    component: () => import(/* webpackChunkName: "itemMusic" */ '../components/video/videoDetail.vue')
   },
   {
     path: '/infoUser',

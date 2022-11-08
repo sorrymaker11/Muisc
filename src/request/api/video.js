@@ -1,9 +1,9 @@
 import service from '..';
 
-export function getMv(data){
+export function getMv(area){
     return service({
         method:'GET',
-        url:`/top/mv`
+        url:`/mv/all?area=${area}`
     })
 }
 //获取播放连接

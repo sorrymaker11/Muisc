@@ -1,8 +1,8 @@
 <template>
     <div class="swiperTop">
         <van-swipe :autoplay="3000" lazy-render>
-            <van-swipe-item v-for="image in state.images" :key="image">
-                <img :src="image.pic" />
+            <van-swipe-item v-for="(item,index) in state.images" :key="index">
+                <img v-lazy="item.pic" @click="go(item.url)"/>
             </van-swipe-item>
         </van-swipe>
     </div>
@@ -18,16 +18,23 @@ export default {
         images:[
         'https://unpkg.com/@vant/assets/apple-1.jpeg',
         'https://unpkg.com/@vant/assets/apple-2.jpeg',
-        ]});
+        ]
+        });
         onMounted(async()=>{
             // axios.get('http://localhost:3000/banner?type=2').then((res)=>{
             //     console.log(res);
             //     state.images=res.data.banners
             // })
             let res=await getBanner();
+            console.log(res);
             state.images=res.data.banners
-        })
-        return { state };
+            // state.url=res.data.url
+        });
+        function go(url){
+            if(url!==null)  window.location.href=url
+        }
+        return { state,
+                    go };
     },
 };
 </script>
@@ -50,7 +57,13 @@ export default {
         height: 100%;
         border-radius: .2rem;
     }
+    .swiperTop .van-swipe__indicator{
+        width: .2rem;
+        height: .2rem;
+    }
     .swiperTop .van-swipe__indicator--active{
+        width: .4rem;
+        border-radius: .1rem;
         background-color: rgb(254,209,80);
     }
 </style>
