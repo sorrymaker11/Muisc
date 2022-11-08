@@ -43,6 +43,7 @@
 
 <script>
 import {getSearchMusic} from '@/request/api/home';
+import MusicListDetail from '@/components/common/MusicListDetail.vue';
     export default{
         data(){
             return{
@@ -82,9 +83,12 @@ import {getSearchMusic} from '@/request/api/home';
                 this.searchRes(key)
             },
             updateIndex(item){
-                this.$store.commit('pushPlayList',item)
-                this.$store.commit('updatePlayListIndex',this.$store.state.playList.length-1)
+                this.$store.commit('musicList/pushPlayList',item)
+                this.$store.commit('musicList/updatePlayListIndex',this.$store.state.musicList.playList.length-1)
             }
+        },
+        components:{
+            MusicListDetail
         }
     }
 </script>

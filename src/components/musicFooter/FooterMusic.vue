@@ -30,27 +30,7 @@
                 position="bottom"
                 :style="{ height: '50%',width:'90%',bottom:'1.5rem',left:'5%',borderRadius:'.4rem',overflow:'scroll'}"
             >
-                    <div class="itemListContent">
-                        <div class="content" v-for="(item,index) in playList" :key='index'>
-                            <div class="contentLeft" @click="palyMusic(index)">
-                                <span>{{index+1}}</span>
-                                <div>
-                                    <h5>{{item.name}}</h5>
-                                    <div class="autor">
-                                        <span v-for="autor in item.ar" :key="autor.id">{{autor.name}} &nbsp;</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="contentRight">
-                                <svg class="icon mv" aria-hidden="true" v-if="item.mv!=0">
-                                    <use xlink:href="#icon-w"></use>
-                                </svg>
-                                <svg class="icon" aria-hidden="true">
-                                    <use xlink:href="#icon-liebiao2"></use>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
+                    <MusicListDetail :itemList='playList' @palyMusic='palyMusic'/>
             </van-popup>
             <van-popup v-model:show="detailShow" position="right" :style="{ height: '100%',width:'100%' }">
                 <MusicDetailVue 
@@ -67,6 +47,7 @@
 <script>
 import {mapMutations, mapState} from 'vuex';
 import MusicDetailVue from '@/components/musicFooter/MusicDetail.vue'
+import MusicListDetail from '@/components/common/MusicListDetail.vue';
 export default{ 
     data(){
         return{
@@ -102,6 +83,9 @@ export default{
                 clearInterval(this.interVal)
             }   
         },
+        palyMusic(index){
+            this.updatePlayListIndex(index)
+        },
         addDuration(){
             this.updateDuration(this.$refs.audio.duration)
         },
@@ -114,9 +98,6 @@ export default{
             this.showList=true
         },
         
-        palyMusic(index){
-            this.updatePlayListIndex(index)
-        },
         ...mapMutations('musicList',
                     ['updateIsbtnShow',
                     'updateDetailShow',
@@ -153,7 +134,8 @@ export default{
         },
     },
     components:{
-        MusicDetailVue
+        MusicDetailVue,
+        MusicListDetail
     }
 }
 </script>
@@ -218,46 +200,5 @@ img{
 .van-popup--bottom{
     bottom:2rem !important;
 }
-.itemListContent{
-    width: 100%;
-}
-.content{
-    width: 100%;
-    height: 1rem;
-    display: flex;
-    justify-content: space-between;
-}
-.contentLeft{
-    width: 60%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-}
-.contentLeft>div{
-    margin-left:.2rem;
-}
-.contentLeft div h5{
-    display: -webkit-box;
-    /*设置弹性盒模型子元素的排列方式*/
-    -webkit-box-orient: vertical;
-    /*限制文本行数*/
-    -webkit-line-clamp: 1;
-    /* 溢出隐藏 */
-    overflow: hidden;
-}
-.autor{
-    font-size: .25rem;
-    color: gray;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    overflow: hidden;
-}
-.contentRight{
-    display: flex;
-    align-items: center;
-}
-.mv{
-    margin-right: .3rem;
-}   
+   
 </style>

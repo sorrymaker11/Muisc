@@ -16,27 +16,7 @@
             </div>
             <div class="topRight">+ <span> 收藏({{changeCount(subscribedCount)}})</span></div>
         </div>
-        <div class="itemListContent">
-            <div class="content" v-for="(item,index) in itemList" :key='index'>
-                <div class="contentLeft" @click="palyMusic(index)">
-                    <span>{{index+1}}</span>
-                    <div>
-                        <h5>{{item.name}}</h5>
-                        <div class="autor">
-                            <span v-for="autor in item.ar" :key="autor.id">{{autor.name}} &nbsp;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="contentRight">
-                    <svg class="icon mv" aria-hidden="true" v-if="item.mv!=0">
-                        <use xlink:href="#icon-w"></use>
-                    </svg>
-                    <svg class="icon" aria-hidden="true">
-                        <use xlink:href="#icon-liebiao2"></use>
-                    </svg>
-                </div>
-            </div>
-        </div>
+        <MusicListDetail :itemList='itemList' @palyMusic='palyMusic'/>
         </div>
     </div>
 </template>
@@ -44,6 +24,7 @@
 <script>
 import { mapMutations } from 'vuex'
 import {getSubscribe} from '@/request/api/home'
+import MusicListDetail from '@/components/common/MusicListDetail.vue';
 export default{
     setup(props){
         function changeCount(num){
@@ -61,6 +42,9 @@ export default{
             this.updatePlayListIndex(index)
         },
         ...mapMutations('musicList',['updatePlayList','updatePlayListIndex']),
+    },
+    components:{
+        MusicListDetail
     }
 }
 </script>

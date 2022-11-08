@@ -6,7 +6,11 @@
                 <svg class="icon" aria-hidden="true" @click="$router.go(-1)">
                     <use xlink:href="#icon-fanhuijiantou"></use>
                 </svg>
-                <span>{{name}}</span>
+                <div class="musicName">
+                    <Vue3Marquee>
+                        <span>{{name}}</span>
+                    </Vue3Marquee>
+                </div>
             </div>
             <video :src="data.url" class="video" controls></video>
         </div>
@@ -15,6 +19,7 @@
 </template>
 
 <script>
+import {Vue3Marquee} from 'vue3-marquee'
 import {getMvDetail,getMvPlay} from '@/request/api/video'
 export default{
     data(){
@@ -37,26 +42,36 @@ export default{
             this.data=play.data.data;
             console.log(this.data);
         }
+    },
+    components:{
+        Vue3Marquee
     }
 }
 </script>
 
 <style scoped>
+svg{
+    width: .7rem;
+    height: .7rem;
+}
 .videoContent{
     position: relative;
 }
 .videoContentTop{
     width: 100%;
     display: flex;
-    justify-content: space-between;
-    /* position: absolute; */
+    justify-content: space-around;
+    position: absolute;
     top: 0;
+    z-index: 2;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.videoContentTop h2{
-    /* text-align: end; */
+.videoContentTop .musicName{
+    width: 70%;
+    text-align: center;
+    line-height: .7rem;
 }
 .video{
     width: 100%;

@@ -2,7 +2,7 @@
     <div class="swiperTop">
         <van-swipe :autoplay="3000" lazy-render>
             <van-swipe-item v-for="(item,index) in state.images" :key="index">
-                <img v-lazy="item.pic" @click="go(item.url)"/>
+                <img :src="item.pic" @click="go(item.url)"/>
             </van-swipe-item>
         </van-swipe>
     </div>
