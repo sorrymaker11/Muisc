@@ -26,7 +26,7 @@ export default {
             //     state.images=res.data.banners
             // })
             let res=await getBanner();
-            console.log(res);
+            // console.log(res);
             state.images=res.data.banners
             // state.url=res.data.url
         });

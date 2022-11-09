@@ -18,6 +18,18 @@
         </div>
     </div>
 </template>
+<script>
+window.addEventListener('scroll',()=>{
+    var scrollHeight = document.documentElement.scrollTop;
+    let topNav=document.querySelector('.TopNav')
+    if(scrollHeight>=100){
+        topNav.style.position='fixed'
+    }
+    else{
+        topNav.style.position='relative'
+    }
+})
+</script>
 
 <style scoped>
     .TopNav{
@@ -27,6 +39,8 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        background-color: #fff;
+        top:0;
     }
     .TopNav .topContent{
         width: 65%;

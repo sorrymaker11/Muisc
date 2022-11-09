@@ -26,6 +26,7 @@ export function getPhoneLogin(data){
     return service({
         method:'GET',
         url:`/login/cellphone?phone=${data.phone}&password=${data.password}`,
+        widthCredentials: true
     })
 }
 //获取用户信息

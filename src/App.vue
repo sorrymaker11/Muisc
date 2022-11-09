@@ -1,6 +1,16 @@
 <template>
   <TopNav/>
-  <router-view/>
+  <!-- <keep-alive>
+    <router-view v-if="$route.meta.keepAlive"/>
+  </keep-alive>
+  <router-view/> -->
+  <router-view  v-slot="{ Component }">
+    <transition>
+      <keep-alive include="myvideo">
+        <component :is="Component"></component>
+      </keep-alive>
+    </transition>
+  </router-view>
   <FooterMusic v-show='$store.state.User.showFooter'/>
 </template>
 

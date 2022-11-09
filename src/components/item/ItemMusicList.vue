@@ -1,6 +1,13 @@
 <template>
     <div class="itemMusicList">
-        <div v-if="!itemList.length">加载中！！！！！！！！！！！！！！！！！！！！</div>
+        <div v-if="!itemList.length">
+            <van-overlay :show="true">
+                <div class="wrapper" >
+                    <van-loading type="spinner" size="24px" />
+                </div>
+            </van-overlay>
+            <van-loading type="spinner" size="24px" />
+        </div>
         <div v-else>
         <div class="itemListTop">
             <div class="topLeft">
@@ -50,6 +57,12 @@ export default{
 </script>
 
 <style lang="scss" scoped>
+ .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
 .itemMusicList{
     width: 100%;
     background-color: #fff;

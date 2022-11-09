@@ -21,6 +21,7 @@
 import {getMv} from '@/request/api/video';
 import videoTop from '@/components/video/videoTop.vue'
 export default{
+    name:'myvideo',
     data(){
         return{
             data:null
@@ -31,7 +32,7 @@ export default{
             let res=await getMv(area)
             this.data=res.data.data
             // console.log(res);
-            console.log(this.data);
+            // console.log(this.data);
         },
         goDetail(id,name){
             this.$router.push({
