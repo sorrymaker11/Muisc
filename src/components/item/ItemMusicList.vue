@@ -23,7 +23,7 @@
             </div>
             <div class="topRight">+ <span> 收藏({{changeCount(subscribedCount)}})</span></div>
         </div>
-        <MusicListDetail :itemList='itemList' @palyMusic='palyMusic'/>
+        <MusicListDetail :itemList='itemList' :updateType="'all'"/>
         </div>
     </div>
 </template>
@@ -44,10 +44,6 @@ export default{
     },
     props:['itemList','subscribedCount'],
     methods:{
-        palyMusic(index){
-            this.updatePlayList(this.itemList);
-            this.updatePlayListIndex(index)
-        },
         ...mapMutations('musicList',['updatePlayList','updatePlayListIndex']),
     },
     components:{

@@ -14,6 +14,13 @@ export function getMusicList(){
         url:'personalized?limit=10',
     })
 }
+// 获取每日推荐歌曲
+export function getDayMusic(data){
+    return service({
+        method:'GET',
+        url:`/recommend/songs?cookie=${data}`,
+    })
+}
 // 搜索
 export function getSearchMusic(keyWord){
     return service({

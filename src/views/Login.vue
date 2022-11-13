@@ -52,7 +52,7 @@ export default{
       console.log(res);
       if(res.data.code===200){
         this.$store.commit('User/updateIsLogin')
-        // localStorage.setItem('token',res.data.token)
+        localStorage.setItem('cookie',res.data.cookie)
         let result=await getLoginUser(res.data.account.id)
         localStorage.setItem('user',JSON.stringify(result.data))
         this.$store.commit('User/updateUser',result.data)

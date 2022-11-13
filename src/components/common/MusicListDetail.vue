@@ -1,8 +1,9 @@
 <template>
     <div class="itemListContent">
             <div class="content" v-for="(item,index) in itemList" :key='index'>
-                <div class="contentLeft" @click="palyMusic(index)">
-                    <span>{{index+1}}</span>
+                <div class="contentLeft" @click="palyMusic(item,index)">
+                    <span v-if="updateType==='footer'">{{index+1}}</span>
+                    <img v-else v-lazy="item.al.picUrl" alt="">
                     <div>
                         <h5>{{item.name}}</h5>
                         <div class="autor">
@@ -23,10 +24,21 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 export default{
     methods:{
-        palyMusic(index){
-            this.$emit('palyMusic',index)
+        palyMusic(item,index){
+            if(this.updateType==='one') {
+                this.$store.commit('musicList/pushPlayList',item)
+                this.$store.commit('musicList/updatePlayListIndex',this.$store.state.musicList.playList.length-1)
+            }
+            else if(this.updateType==='all') {
+                this.updatePlayList(this.itemList);
+                this.updatePlayListIndex(index)
+            }
+            else{
+                this.updatePlayListIndex(index)
+            }
         },
         playMv(id,name){
             this.$router.push({
@@ -36,10 +48,15 @@ export default{
                     name
                 }
             })
-        }
+        },
+        
+        ...mapMutations('musicList',
+                    [
+                    'updatePlayList',
+                    'updatePlayListIndex',
+                    ]),
     },
-     props:['itemList']
-    
+     props:['itemList','updateType']
 }
 </script>
 
@@ -58,6 +75,11 @@ export default{
     height: 100%;
     display: flex;
     align-items: center;
+}
+.contentLeft img{
+    width: .8rem;
+    height: .8rem;
+    border-radius:.2rem ;
 }
 .contentLeft>div{
     margin-left:.2rem;

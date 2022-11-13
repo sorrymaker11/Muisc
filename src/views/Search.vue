@@ -17,7 +17,7 @@
                 {{item}}
             </span>
         </div>
-        <div class="itemListContent">
+        <!-- <div class="itemListContent">
             <div class="content" v-for="(item,index) in searchList" :key='index'>
                 <div class="contentLeft" @click="updateIndex(item,i)">
                     <span>{{index+1}}</span>
@@ -37,7 +37,8 @@
                     </svg>
                 </div>
             </div>
-        </div>
+        </div> -->
+        <MusicListDetail :itemList="searchList" :updateType="'one'"/>
     </div>
 </template>
 
@@ -82,10 +83,6 @@ import MusicListDetail from '@/components/common/MusicListDetail.vue';
             historySearch(key){
                 this.searchRes(key)
             },
-            updateIndex(item){
-                this.$store.commit('musicList/pushPlayList',item)
-                this.$store.commit('musicList/updatePlayListIndex',this.$store.state.musicList.playList.length-1)
-            }
         },
         components:{
             MusicListDetail

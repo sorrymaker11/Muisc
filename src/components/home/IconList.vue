@@ -1,7 +1,7 @@
 <template>
     <div class="iconList">
         <div class="iconItem">
-            <svg class="icon" aria-hidden="true">
+            <svg class="icon" aria-hidden="true" @click="getData">
                 <use xlink:href="#icon-meirituijian"></use>
             </svg>
             <span>每日推荐</span>
@@ -26,6 +26,19 @@
         </div>
     </div>
 </template>
+<script>
+import { getDayMusic } from '@/request/api/home';
+export default{
+    methods:{
+        getData:async function(){
+            this.$router.push('/dailySongs')
+            // let data=localStorage.getItem('cookie')
+            // let res=await getDayMusic(data);
+            // console.log(res);
+        }
+    }
+}
+</script>
 <style scoped>
     .iconList{
         width: 100%;

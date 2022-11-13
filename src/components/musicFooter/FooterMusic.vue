@@ -30,7 +30,7 @@
                 position="bottom"
                 :style="{ height: '50%',width:'90%',bottom:'1.5rem',left:'5%',borderRadius:'.4rem',overflow:'scroll'}"
             >
-                    <MusicListDetail :itemList='playList' @palyMusic='palyMusic'/>
+                    <MusicListDetail :itemList='playList' :updateType="'footer'"/>
             </van-popup>
             <van-popup v-model:show="detailShow" position="right" :style="{ height: '100%',width:'100%' }">
                 <MusicDetailVue 
@@ -82,9 +82,6 @@ export default{
                 this.updateIsbtnShow(true)
                 clearInterval(this.interVal)
             }   
-        },
-        palyMusic(index){
-            this.updatePlayListIndex(index)
         },
         addDuration(){
             this.updateDuration(this.$refs.audio.duration)

@@ -14,13 +14,14 @@
             </div>
             <video :src="data.url" class="video" controls></video>
         </div>
-        
+        <videoComment/>
     </div>
 </template>
 
 <script>
 import {Vue3Marquee} from 'vue3-marquee'
-import {getMvDetail,getMvPlay} from '@/request/api/video'
+import {getMvPlay} from '@/request/api/video'
+import videoComment from './videoComment.vue'
 export default{
     data(){
         return{
@@ -44,7 +45,8 @@ export default{
         }
     },
     components:{
-        Vue3Marquee
+        Vue3Marquee,
+        videoComment
     }
 }
 </script>

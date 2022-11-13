@@ -20,3 +20,10 @@ export function getMvPlay(id){
         url:`/mv/url?id=${id}`,
     })
 }
+//获取视频评论
+export function getMvComment(id){
+    return service({
+        method:'GET',
+        url:`/comment/mv?id=${id}`,
+    })
+}
