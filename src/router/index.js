@@ -45,6 +45,17 @@ const routes = [
     name: 'videodetail',
     component: () => import(/* webpackChunkName: "itemMusic" */ '../components/video/videoDetail.vue')
   },
+  // 歌手展示
+  {
+    path: '/showsinger',
+    name: 'showsinger',
+    component: () => import(/* webpackChunkName: "itemMusic" */ '../views/showSinger.vue'),
+  },
+  {
+    path: '/singerdetail',
+    name: 'singerdetail',
+    component: () => import(/* webpackChunkName: "itemMusic" */ '../components/singer/singerDetail.vue'),
+  },
   //用户信息页面
   {
     path: '/infoUser',

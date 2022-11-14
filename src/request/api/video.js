@@ -27,3 +27,10 @@ export function getMvComment(id){
         url:`/comment/mv?id=${id}`,
     })
 }
+//给视频评论点赞
+export function likeComment(data){
+    return service({
+        method:'GET',
+        url:`/comment/like?id=${data.id}&cid=${data.cid}&t=${data.t}&type=1&cookie=${data.cookie}`,
+    })
+}

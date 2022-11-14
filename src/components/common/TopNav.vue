@@ -8,7 +8,7 @@
         <div class="topContent">
             <router-link active-class="active" to='/infoUser'>我的</router-link>
             <router-link active-class="active" to="/">发现</router-link>
-            <span>云村</span>
+            <router-link active-class="active" to="/showsinger">歌手</router-link>
             <router-link active-class="active" to='/video'>视频</router-link>
         </div>
         <div class="topright">

@@ -18,7 +18,7 @@
                     </div>
                     <div class="like">
                         <span>{{item.likedCount}}</span>
-                        <svg class="icon" aria-hidden="true">
+                        <svg class="icon" aria-hidden="true" @click="like({'cid':item.commentId,'t':'1'})">
                             <use xlink:href="#icon-dianzan1"></use>
                         </svg>
                     </div>
@@ -31,7 +31,7 @@
     </div>
 </template>
 <script>
-import {getMvComment} from '@/request/api/video'
+import {getMvComment,likeComment} from '@/request/api/video'
 import { throwStatement } from '@babel/types'
 export default{
     data(){
@@ -57,6 +57,13 @@ export default{
             if(type==='recommend') this.showComment=this.comment.comments;
             else if(type==='hot') this.showComment=this.comment.hotComments;
             else this.showComment=this.comment.topComments;
+        },
+        like:async function (data){
+            data.id=this.$route.params.id
+            data.cookie=localStorage.getItem('cookie')
+            let res=await likeComment(data);
+            console.log(res)
+            console.log(data)
         }
     }
 }
