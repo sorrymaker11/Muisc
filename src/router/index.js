@@ -50,12 +50,22 @@ const routes = [
     path: '/showsinger',
     name: 'showsinger',
     component: () => import(/* webpackChunkName: "itemMusic" */ '../views/showSinger.vue'),
+    child:[]
   },
+  // 歌手详细信息
   {
-    path: '/singerdetail',
+    path: '/singerdetail/:id',
     name: 'singerdetail',
     component: () => import(/* webpackChunkName: "itemMusic" */ '../components/singer/singerDetail.vue'),
+    children:[
+    ]
   },
+    // 专辑信息
+    {
+      path: '/singerdetail/albumdetail/:id',
+      name: 'albumdetail',
+      component: () => import(/* webpackChunkName: "itemMusic" */ '../views/albumDetail.vue'),
+    },
   //用户信息页面
   {
     path: '/infoUser',

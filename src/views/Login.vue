@@ -1,5 +1,6 @@
 <template>
   <div>
+    <TopNav/>
     <div class="login">
       <h2 class="title">欢迎登录</h2>
       <div class="loginContent">
@@ -39,6 +40,7 @@
 
 <script>
 import {getLoginUser} from '@/request/api/home';
+import TopNav from "@/components/common/TopNav.vue"
 export default{
   data(){
     return{
@@ -63,6 +65,7 @@ export default{
       }
     }
   },
+  components:{TopNav}
 }
 </script>
 

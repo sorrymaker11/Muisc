@@ -1,5 +1,6 @@
 <template>
   <div>
+    <TopNav/>
     <img :src="user.playlist[0].creator.backgroundUrl" alt="" class="bgimg">
     <div class="infoUserTop">
       <img :src="user.playlist[0].creator.avatarUrl" alt="图片加载失败~" class="profileImg">
@@ -17,6 +18,7 @@
 import { mapState } from 'vuex'
 import showList from '@/components/common/showList.vue';
 import {getLoginOut} from '@/request/api/home'
+import TopNav from "@/components/common/TopNav.vue"
 export default{
   data(){
     return{
@@ -38,7 +40,7 @@ export default{
     },
   },
   components:{
-    showList
+    showList,TopNav
   }
 }
 </script>

@@ -1,5 +1,6 @@
 <template>
     <div class="allVideo">
+        <TopNav/>
         <videoTop :getMvData="getMvData"/>
         <div v-for="item in data" :key="item.id" class="content" @click="goDetail(item.id,item.name)">
             <div class="bacImg"><img v-lazy="item.cover" alt="图片加载失败"></div>
@@ -19,6 +20,7 @@
 
 <script>
 import {getMv} from '@/request/api/video';
+import TopNav from "@/components/common/TopNav.vue"
 import videoTop from '@/components/video/videoTop.vue'
 export default{
     name:'myvideo',
@@ -47,7 +49,7 @@ export default{
     mounted(){
         this.getMvData('全部')
     },
-    components:{videoTop}
+    components:{videoTop,TopNav}
 }
 </script>
 

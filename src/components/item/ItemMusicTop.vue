@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img :src="playlist.coverImgUrl" alt="" class="bgimg">
+        <img :src="playlist.coverImgUrl||playlist.blurPicUrl" alt="" class="bgimg">
         <div class="itemMusicTop">
             <div class="itemLeft">
                 <svg class="icon" aria-hidden="true" @click="$router.go(-1)">
@@ -19,13 +19,13 @@
         </div>
         <div class="content">
             <div class="contentLeft">
-                <img :src="playlist.coverImgUrl" alt="" >
+                <img :src="playlist.coverImgUrl||playlist.blurPicUrl" alt="" >
             </div>
             <div class="contentRight">
                 <p class="musicListName">{{playlist.name}}</p>
                 <div class="right_img">
-                    <img :src="playlist.creator.backgroundUrl" alt="">
-                    <span>{{playlist.creator.nickname}}</span>
+                    <img :src="playlist.creator.backgroundUrl||playlist.artist.picUrl" alt="">
+                    <span>{{playlist.creator.nickname||playlist.artist.name}}</span>
                     <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-jinrujiantou"></use>
                     </svg>
@@ -44,13 +44,13 @@
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-pinglun"></use>
                 </svg>
-                <span>{{changeCount(playlist.commentCount)}}</span>
+                <span>{{changeCount(playlist.commentCount||playlist.info.commentCount)}}</span>
             </div>
             <div>
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-fenxiang"></use>
                 </svg>
-                <span>{{changeCount(playlist.shareCount)}}</span>
+                <span>{{changeCount(playlist.shareCount||playlist.info.shareCount)}}</span>
             </div>
             <div>
                 <svg class="icon" aria-hidden="true">
@@ -71,11 +71,14 @@
 <script>
 export default{
     setup(props){
-        console.log(props.playlist);
+        // console.log(props.playlist);
         // 通过props传值，判断如果数据拿不到，就需要拿session里面的数据(难点)
-        if(props.playlist.creator=''){
-            props.playlist.creator=JSON.parse(sessionStorage.getItem('itemDetail').playlist).creator
+        if(props.playlist.creator==undefined){
+            // props.playlist.creator=JSON.parse(sessionStorage.getItem('itemDetail').playlist).creator
+            props.playlist.creator={}
         };
+        if(props.playlist.info==undefined){props.playlist.info={};console.log(111);}
+        if(props.playlist.artist==undefined){props.playlist.artist={}}
         function changeCount(num){
             if(num>=100000000) return (num/100000000).toFixed(1)+'亿'
             else if(num>=10000) return (num/10000).toFixed(1)+'万'
@@ -122,7 +125,7 @@ export default{
     .content{
         width: 100%;
         display: flex;
-        margin:.2rem 0 .2rem;
+        margin:1.2rem 0 .2rem;
         color: rgb(238,179,55);
     }
     .content .icon{

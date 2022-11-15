@@ -13,3 +13,17 @@ export function getSingerDetail(id){
         url:`/artists?id=${id}`
     })
 }
+
+export function getSingerAlbum(id){
+    return service({
+        method:'GET',
+        url:`/artist/album?id=${id}&limit=30`
+    })
+}
+
+export function getAlbumDetail(id){
+    return service({
+        method:'GET',
+        url:`/album?id=${id}`
+    })
+}

@@ -25,12 +25,14 @@ export default{
             let id=useRoute().query.id
             let res=await getMusicItemList(id);
             state.playList=res.data.playlist
+            console.log(state.playList);
 
             // 获取歌单的歌曲
             let result=await getItemList(id)
             state.itemList=result.data.songs
             // 防止页面刷新导致数据丢失，放到本地存储
             sessionStorage.setItem('itemDetail',JSON.stringify(state))
+            console.log(state.itemList);
         });
         return {state}
     },

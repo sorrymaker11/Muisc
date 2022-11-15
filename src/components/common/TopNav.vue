@@ -19,16 +19,26 @@
     </div>
 </template>
 <script>
-window.addEventListener('scroll',()=>{
-    var scrollHeight = document.documentElement.scrollTop;
-    let topNav=document.querySelector('.TopNav')
-    if(scrollHeight>=100){
-        topNav.style.position='fixed'
+export default{
+    created(){    
+        window.addEventListener('scroll',this.getScroll)
+    },
+    methods:{
+        getScroll(){
+            var scrollHeight = document.documentElement.scrollTop;
+            let topNav=document.querySelector('.TopNav')
+            if(scrollHeight>=100){
+                topNav.style.position='fixed'
+            }
+            else{
+                topNav.style.position='relative'
+            }
+        }
+    },
+    beforeUnmount(){
+        window.removeEventListener('scroll',this.getScroll)
     }
-    else{
-        topNav.style.position='relative'
-    }
-})
+}
 </script>
 
 <style scoped>

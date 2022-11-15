@@ -1,11 +1,13 @@
 <template>
     <div>
+        <TopNav/>
         <MusicListDetail :itemList="dailySongs" :updateType="'one'"/>
     </div>
 </template>
 <script>
 import MusicListDetail from '@/components/common/MusicListDetail.vue';
 import { getDayMusic } from '@/request/api/home';
+import TopNav from "@/components/common/TopNav.vue"
 export default{
     data(){
         return{
@@ -24,7 +26,7 @@ export default{
         }
     },
     components:{
-        MusicListDetail
+        MusicListDetail,TopNav
     }
 }
 </script>

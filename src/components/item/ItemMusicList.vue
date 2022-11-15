@@ -23,7 +23,7 @@
             </div>
             <div class="topRight">+ <span> 收藏({{changeCount(subscribedCount)}})</span></div>
         </div>
-        <MusicListDetail :itemList='itemList' :updateType="'all'"/>
+        <MusicListDetail :itemList='itemList' :updateType="'all'" />
         </div>
     </div>
 </template>
@@ -66,6 +66,7 @@ export default{
     margin: .2rem 0 1rem;
     border-top-right-radius: .4rem;
     border-top-left-radius: .4rem;
+    min-height: 10rem;
 }
 .itemListTop{
     width: 100%;

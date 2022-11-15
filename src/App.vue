@@ -1,5 +1,4 @@
 <template>
-  <TopNav/>
   <!-- <keep-alive>
     <router-view v-if="$route.meta.keepAlive"/>
   </keep-alive>
@@ -16,12 +15,10 @@
 
 <script>
 import FooterMusic from "@/components/musicFooter/FooterMusic.vue"
-import TopNav from "@/components/common/TopNav.vue"
 export default {
  
   components:{
     FooterMusic,
-    TopNav
   }
 }
 </script>
@@ -31,6 +28,8 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+body{
   color: rgb(254,209,81);
 }
 .icon{
