@@ -54,6 +54,7 @@ export default{
         display: flex;
         flex-direction: column;
         align-items: center;
+        /* color: #222; */
     }
     .icon{
         width: 1rem;

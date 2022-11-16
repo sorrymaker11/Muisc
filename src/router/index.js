@@ -43,7 +43,7 @@ const routes = [
   {
     path: '/videodetail/:id/:name',
     name: 'videodetail',
-    component: () => import(/* webpackChunkName: "itemMusic" */ '../components/video/videoDetail.vue')
+    component: () => import(/* webpackChunkName: "itemMusic" */ '../views/videoDetail.vue')
   },
   // 歌手展示
   {
@@ -56,7 +56,7 @@ const routes = [
   {
     path: '/singerdetail/:id',
     name: 'singerdetail',
-    component: () => import(/* webpackChunkName: "itemMusic" */ '../components/singer/singerDetail.vue'),
+    component: () => import(/* webpackChunkName: "itemMusic" */ '../views/singerDetail.vue'),
     children:[
     ]
   },
@@ -65,6 +65,11 @@ const routes = [
       path: '/singerdetail/albumdetail/:id',
       name: 'albumdetail',
       component: () => import(/* webpackChunkName: "itemMusic" */ '../views/albumDetail.vue'),
+    },// 专辑信息
+    {
+      path: '/musicComment',
+      name: 'musicComment',
+      component: () => import(/* webpackChunkName: "itemMusic" */ '../views/musicComment.vue'),
     },
   //用户信息页面
   {

@@ -56,6 +56,7 @@ export default{
 <style scoped>
 .allVideo{
     margin-bottom: 1rem;
+    color: #222;
 }
 .content{
     width: 90%;

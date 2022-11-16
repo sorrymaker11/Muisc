@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ItemMusicTop :playlist="album"/>
+        <ItemMusicTop :playlist="album" :type='"2"' />
         <ItemMusicList :itemList="songs" :subscribedCount="subscribedCount"/>
     </div>
 </template>
@@ -23,13 +23,18 @@ export default{
         albumDetail:async function(){
             let res=await getAlbumDetail(this.$route.params.id)
             this.album=res.data.album;
+            this.album.creator={};
             this.songs=res.data.songs;
-            this.subscribedCount=album.info.likedCount;
+            this.subscribedCount=res.data.album.copyrightId;
+            // console.log(res);
         }
     },
     components:{
         ItemMusicTop,ItemMusicList
     },
+    beforeUnmount(){
+        sessionStorage.setItem('playlist',JSON.stringify(this.album))
+    }
 }
 </script>
 <style scoped>

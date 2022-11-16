@@ -19,3 +19,10 @@ export function getMusicLyric(data){
         url:`/lyric?id=${data}`
     })
 }
+// 获取歌单评论
+export function getMusicComment(data){
+    return service({
+        method:'GET',
+        url:`/comment/playlist?id=${data}`
+    })
+}

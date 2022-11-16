@@ -42,6 +42,7 @@ img{
     top: .1rem;
     right: .3rem;
     line-height: 29px;
+    color: white;
 }
 .name{
     display: -webkit-box;

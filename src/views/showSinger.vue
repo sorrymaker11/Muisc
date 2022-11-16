@@ -64,6 +64,7 @@ export default{
     width: 90%;
     margin: 0 auto;
     margin-bottom: 1rem;
+    color: #222;
 }
 .singerList{
     display: flex;

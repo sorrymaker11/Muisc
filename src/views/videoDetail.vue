@@ -14,14 +14,14 @@
             </div>
             <video :src="data.url" class="video" controls></video>
         </div>
-        <videoComment/>
+        <videoComment :type="1"/>
     </div>
 </template>
 
 <script>
 import {Vue3Marquee} from 'vue3-marquee'
 import {getMvPlay} from '@/request/api/video'
-import videoComment from './videoComment.vue'
+import videoComment from '../components/common/comment.vue'
 export default{
     data(){
         return{
@@ -41,8 +41,8 @@ export default{
             // console.log(this.$route.params.name);
             let play=await getMvPlay(id)
             this.data=play.data.data;
-            console.log(this.data);
-        }
+            // console.log(this.data);
+        },
     },
     components:{
         Vue3Marquee,

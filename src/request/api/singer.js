@@ -20,10 +20,17 @@ export function getSingerAlbum(id){
         url:`/artist/album?id=${id}&limit=30`
     })
 }
-
+//专辑信息
 export function getAlbumDetail(id){
     return service({
         method:'GET',
         url:`/album?id=${id}`
+    })
+}
+
+export function getAlbumComment(id){
+    return service({
+        method:'GET',
+        url:`/comment/album?id=${id}`
     })
 }
