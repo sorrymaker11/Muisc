@@ -19,7 +19,7 @@
             <span>歌单</span>
         </div>
         <div class="iconItem">
-            <svg class="icon" aria-hidden="true">
+            <svg class="icon" aria-hidden="true" @click="$router.push('/ranklist')">
                 <use xlink:href='#icon-daochu1024-02-copy'></use>
             </svg>
             <span>排行榜</span>

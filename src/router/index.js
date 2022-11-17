@@ -71,6 +71,12 @@ const routes = [
       name: 'musicComment',
       component: () => import(/* webpackChunkName: "itemMusic" */ '../views/musicComment.vue'),
     },
+  // 排行榜
+  {
+    path: '/ranklist',
+    name: 'ranklist',
+    component: () => import(/* webpackChunkName: "itemMusic" */ '../views/rankList.vue'),
+  },
   //用户信息页面
   {
     path: '/infoUser',

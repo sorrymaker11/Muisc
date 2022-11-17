@@ -1,16 +1,18 @@
 <template>
-    <div class="showSinger">
-        <TopNav/>
-        <ul class="top">
-            <li @click="showSinger('7')" :class="{active:type=='7'}">华语</li>
-            <li @click="showSinger('96')" :class="{active:type=='96'}">欧美</li>
-            <li @click="showSinger('8')" :class="{active:type=='8'}">日本</li>
-            <li @click="showSinger('16')" :class="{active:type=='16'}">韩国</li>
-        </ul>
-        <div class="singer">
-            <div v-for="item in singer" :key="item.id" class="singerList" @click="goSingerDetail(item.id)">
-                <img v-lazy="item.img1v1Url" alt="">
-                <span>{{item.name}}</span>
+    <div>
+        <div class="showSinger" >
+            <TopNav/>
+            <ul class="top">
+                <li @click="showSinger('7')" :class="{active:type=='7'}">华语</li>
+                <li @click="showSinger('96')" :class="{active:type=='96'}">欧美</li>
+                <li @click="showSinger('8')" :class="{active:type=='8'}">日本</li>
+                <li @click="showSinger('16')" :class="{active:type=='16'}">韩国</li>
+            </ul>
+            <div class="singer">
+                <div v-for="item in singer" :key="item.id" class="singerList" @click="goSingerDetail(item.id)">
+                    <img v-lazy="item.img1v1Url" alt="">
+                    <span>{{item.name}}</span>
+                </div>
             </div>
         </div>
     </div>
@@ -44,7 +46,7 @@ export default{
             })
         }
     },
-    components:{TopNav}
+    components:{TopNav,}
 }
 </script>
 <style scoped>

@@ -1,14 +1,5 @@
 <template>
     <div class="itemMusicList">
-        <div v-if="!itemList.length">
-            <van-overlay :show="true">
-                <div class="wrapper" >
-                    <van-loading type="spinner" size="24px" />
-                </div>
-            </van-overlay>
-            <van-loading type="spinner" size="24px" />
-        </div>
-        <div v-else>
         <div class="itemListTop">
             <div class="topLeft">
                 <div>
@@ -21,17 +12,19 @@
                     <span>(共{{itemList.length}}首)</span>
                 </div>
             </div>
-            <div class="topRight">+ <span> 收藏({{changeCount(subscribedCount)}})</span></div>
+            <div class="topRight" @click="like({t:1,id:$route.query.id})">
+                <span v-if="!liked"> +收藏({{changeCount(subscribedCount)}})</span>
+                <span v-else>已收藏</span>
+            </div>
         </div>
         <MusicListDetail :itemList='itemList' :updateType="'all'" />
-        </div>
     </div>
 </template>
 
 <script>
 import { mapMutations } from 'vuex'
-import {getSubscribe} from '@/request/api/home'
 import MusicListDetail from '@/components/common/MusicListDetail.vue';
+import {likeMusicList} from'@/request/api/item'
 export default{
     setup(props){
         function changeCount(num){
@@ -39,10 +32,14 @@ export default{
             else if(num>=10000) return (num/10000).toFixed(1)+'万'
             else return num
         };
-        
-        return {changeCount}
+        let like=async function(data){
+            data.cookie=localStorage.getItem('cookie')
+            let res=await likeMusicList(data)
+            
+        }
+        return {changeCount,like}
     },
-    props:['itemList','subscribedCount'],
+    props:['itemList','subscribedCount','liked'],
     methods:{
         ...mapMutations('musicList',['updatePlayList','updatePlayListIndex']),
     },

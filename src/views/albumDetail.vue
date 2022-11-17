@@ -1,6 +1,9 @@
 <template>
     <div>
-        <ItemMusicTop :playlist="album" :type='"2"' />
+        <ItemMusicTop :playlist="album" :creator='album.artist' :type="'2'" >
+            <template v-slot:commentCount><span>{{changeCount(info.commentCount)}}</span></template>
+            <template v-slot:shareCount><span>{{changeCount(info.shareCount)}}</span></template>
+        </ItemMusicTop>
         <ItemMusicList :itemList="songs" :subscribedCount="subscribedCount"/>
     </div>
 </template>
@@ -13,7 +16,8 @@ export default{
         return{
             album:{},
             songs:[],
-            subscribedCount:''
+            subscribedCount:'',
+            info:{}
         }
     },
     created(){
@@ -23,11 +27,17 @@ export default{
         albumDetail:async function(){
             let res=await getAlbumDetail(this.$route.params.id)
             this.album=res.data.album;
-            this.album.creator={};
             this.songs=res.data.songs;
-            this.subscribedCount=res.data.album.copyrightId;
+            this.subscribedCount=res.data.album.info.likedCount;
+            this.info=res.data.album.info
             // console.log(res);
-        }
+        },
+        
+        changeCount(num){
+            if(num>=100000000) return (num/100000000).toFixed(1)+'亿'
+            else if(num>=10000) return (num/10000).toFixed(1)+'万'
+            else return num
+        },
     },
     components:{
         ItemMusicTop,ItemMusicList

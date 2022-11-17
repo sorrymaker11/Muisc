@@ -1,9 +1,12 @@
 <template>
 <div>
-    <!-- <van-loading type="spinner" color="#1989fa" v-if='loading'/> -->
-    <div>
-        <ItemMusicTop :playlist="state.playList" :type='"3"'/>
-        <ItemMusicList :itemList="state.itemList" :subscribedCount="state.playList.subscribedCount" />
+    <loading v-if="!state.playList.commentCount"/>
+    <div v-else>
+        <ItemMusicTop :playlist="state.playList" :creator='state.playList.creator' :type="'3'">
+            <template v-slot:commentCount><span>{{changeCount(state.playList.commentCount)}}</span></template>
+            <template v-slot:shareCount><span>{{changeCount(state.playList.shareCount)}}</span></template>
+        </ItemMusicTop>
+        <ItemMusicList :itemList="state.itemList" :subscribedCount="state.playList.subscribedCount" :liked="state.playList.subscribed" />
     </div>
 </div>
 </template>
@@ -18,13 +21,21 @@ export default{
     setup(){
         const state=reactive({
             playList:{},
-            itemList:[]
+            itemList:[],
+            liked:false
         });
+            
+        function changeCount(num){
+            if(num>=100000000) return (num/100000000).toFixed(1)+'亿'
+            else if(num>=10000) return (num/10000).toFixed(1)+'万'
+            else return num
+        }
         onMounted(async()=>{
             let id=useRoute().query.id
-            let res=await getMusicItemList(id);
+            let cookie=localStorage.getItem('cookie')
+            let res=await getMusicItemList(id,cookie);
             state.playList=res.data.playlist
-            // console.log(state.playList);
+            state.liked=res.data.playlist.subscribed
 
             // 获取歌单的歌曲
             let result=await getItemList(id)
@@ -33,10 +44,10 @@ export default{
             sessionStorage.setItem('itemDetail',JSON.stringify(state))
             // console.log(state.itemList);
         });
-        return {state}
+        return {state,changeCount}
     },
     components:{
-        ItemMusicTop,ItemMusicList
+        ItemMusicTop,ItemMusicList,
     },
 }
 </script>

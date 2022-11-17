@@ -40,7 +40,9 @@ export default{
             return strDate;
         }
     },
-    props:['hotAlbums']
+    props:['hotAlbums'],
+    components:{
+    }
 }
 </script>
 <style scoped>

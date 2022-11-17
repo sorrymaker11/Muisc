@@ -1,32 +1,34 @@
 <template>
-    <div class="all">
-        <div class="top">
-            <h3>评论区</h3>
-            <div class="topType">
-                <span @click="changType('recommend')" :class="{active:nowType==='recommend'}">推荐</span>
-                <span @click="changType('hot')" :class="{active:nowType==='hot'}">最热</span>
-                <span @click="changType('new')" :class="{active:nowType==='new'}">最新</span>
+    <div>
+        <div class="all">
+            <div class="top">
+                <h3>评论区</h3>
+                <div class="topType">
+                    <span @click="changType('recommend')" :class="{active:nowType==='recommend'}">推荐</span>
+                    <span @click="changType('hot')" :class="{active:nowType==='hot'}">最热</span>
+                    <span @click="changType('new')" :class="{active:nowType==='new'}">最新</span>
+                </div>
             </div>
-        </div>
-        <div class="noComment" v-show="!showComment[0]">暂无评论，来抢沙发吧~</div>
-        <div v-show="showComment[0]">
-            <div class="content" v-for="item in showComment" :key="item.userId">
-                <div class="contentLeft"><img :src="item.user.avatarUrl" alt=""></div>
-                <div class="contentRight">
-                    <div class="contentRightTop">
-                        <div>
-                            <div class="nickname">{{item.user.nickname}}</div>
-                            <div class="time">{{item.timeStr}}</div>
+            <div class="noComment" v-show="!showComment[0]">暂无评论，来抢沙发吧~</div>
+            <div v-show="showComment[0]">
+                <div class="content" v-for="item in showComment" :key="item.userId">
+                    <div class="contentLeft"><img :src="item.user.avatarUrl" alt=""></div>
+                    <div class="contentRight">
+                        <div class="contentRightTop">
+                            <div>
+                                <div class="nickname">{{item.user.nickname}}</div>
+                                <div class="time">{{item.timeStr}}</div>
+                            </div>
+                            <div class="like">
+                                <span>{{item.likedCount}}</span>
+                                <svg class="icon" aria-hidden="true" @click="like({'cid':item.commentId,'t':'1'})">
+                                    <use xlink:href="#icon-dianzan1"></use>
+                                </svg>
+                            </div>
                         </div>
-                        <div class="like">
-                            <span>{{item.likedCount}}</span>
-                            <svg class="icon" aria-hidden="true" @click="like({'cid':item.commentId,'t':'1'})">
-                                <use xlink:href="#icon-dianzan1"></use>
-                            </svg>
+                        <div class="comment">
+                            {{item.content}}
                         </div>
-                    </div>
-                    <div class="comment">
-                        {{item.content}}
                     </div>
                 </div>
             </div>
@@ -89,7 +91,8 @@ export default{
             // console.log(data)
         }
     },
-    props:['type']
+    props:['type'],
+
 }
 </script>
 <style scoped>

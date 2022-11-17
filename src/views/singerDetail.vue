@@ -1,37 +1,41 @@
 <template>
     <div>
-        <div class="bg">
-            <img :src="singer.picUrl" alt="">
-            <div class="mask"></div>
-        </div>
-        <div class="top">
-            <svg class="icon" aria-hidden="true" @click="$router.go(-1)">
-                <use xlink:href="#icon-fanhuijiantou"></use>
-            </svg>
-            <span>{{singer.name}}</span>
-        </div>
-        <div class="content">
-            <div class="nav">
-                <span @click="changType('intro')" :class="{active:showType=='intro'}">简介</span>
-                <span @click="changType('songs')" :class="{active:showType=='songs'}">歌曲</span>
-                <span @click="SingerAlbum('album')" :class="{active:showType=='album'}">专辑</span>
+        <loading v-if="!singer.briefDesc"/>
+        <div v-else>
+            <div class="bg">
+                <img :src="singer.picUrl" alt="">
+                <div class="mask"></div>
             </div>
-            <intro :intro="singer.briefDesc" v-show="showType=='intro'"/>
-            <songs :songs="songs" v-show="showType=='songs'"/>
-            <album :hotAlbums="hotAlbums" v-show="showType=='album'"/>
-            <!-- <div class="intro" v-if="type=='intro'">
-                <h2>歌手简介</h2>
-                <div>{{singer.briefDesc}}</div>
+            <div class="top">
+                <svg class="icon" aria-hidden="true" @click="$router.go(-1)">
+                    <use xlink:href="#icon-fanhuijiantou"></use>
+                </svg>
+                <span>{{singer.name}}</span>
             </div>
-            <div class="songs" v-else></div> -->
+            <div class="content">
+                <div class="nav">
+                    <span @click="changType('intro')" :class="{active:showType=='intro'}">简介</span>
+                    <span @click="changType('songs')" :class="{active:showType=='songs'}">歌曲</span>
+                    <span @click="SingerAlbum('album')" :class="{active:showType=='album'}">专辑</span>
+                </div>
+                <intro :intro="singer.briefDesc" v-show="showType=='intro'"/>
+                <songs :songs="songs" v-show="showType=='songs'"/>
+                <album :hotAlbums="hotAlbums" v-show="showType=='album'"/>
+                <!-- <div class="intro" v-if="type=='intro'">
+                    <h2>歌手简介</h2>
+                    <div>{{singer.briefDesc}}</div>
+                </div>
+                <div class="songs" v-else></div> -->
+            </div>
         </div>
-    </div>
+</div>
 </template>
 <script>
 import {getSingerDetail,getSingerAlbum} from '@/request/api/singer'   //在为创建vue实例之前先写这个会报错，sfc is undefined
 import intro from '@/components/singer/intro.vue'
 import songs from '@/components/singer/songs.vue'
 import album from '@/components/singer/album.vue'
+import loading from '@/components/common/loading.vue';
 export default{
     data(){
         return{
@@ -64,7 +68,8 @@ export default{
     components:{
         intro,
         songs,
-        album
+        album,
+        loading
     }
 }
 </script>

@@ -38,19 +38,24 @@
             </div>
             
         </div> -->
-        <musicListIntro :playlist='playlist'/>
+        <musicListIntro :playlist='playlist'>
+            <template v-slot:backgroundUrl><img :src="creator.backgroundUrl||creator.picUrl" alt="" class="bgcimg"></template>
+            <template v-slot:nickname><span class="nickname">{{creator.nickname||creator.name}}</span></template>
+        </musicListIntro>
         <div class="itemMusicFooter">
             <div>
                 <svg class="icon" aria-hidden="true" @click="$router.push(`/musicComment?id=${$route.params.id||$route.query.id}&type=${type}`)">
                     <use xlink:href="#icon-pinglun"></use>
                 </svg>
-                <span>{{changeCount(playlist.commentCount||playlist.info.commentCount)}}</span>
+                <!-- <span>{{changeCount(playlist.commentCount||playlist.info.commentCount)}}</span> -->
+                <slot name="commentCount"></slot>
             </div>
             <div>
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-fenxiang"></use>
                 </svg>
-                <span>{{changeCount(playlist.shareCount||playlist.info.shareCount)}}</span>
+                <!-- <span>{{changeCount(playlist.shareCount||playlist.info.shareCount)}}</span> -->
+                <slot name="shareCount"></slot>
             </div>
             <div>
                 <svg class="icon" aria-hidden="true">
@@ -74,19 +79,14 @@ export default{
     setup(props){
         // console.log(props.playlist);
         // 通过props传值，判断如果数据拿不到，就需要拿session里面的数据(难点)
-        if(props.playlist.creator=''){
-            props.playlist.creator=JSON.parse(sessionStorage.getItem('itemDetail').playlist).creator
-        };
-        if(props.playlist.info==undefined){props.playlist.info={}}
-        if(props.playlist.artist==undefined){props.playlist.artist={}}
-        function changeCount(num){
-            if(num>=100000000) return (num/100000000).toFixed(1)+'亿'
-            else if(num>=10000) return (num/10000).toFixed(1)+'万'
-            else return num
-        };
-        return {changeCount}
+        // if(props.playlist.creator=''){
+        //     props.playlist.creator=JSON.parse(sessionStorage.getItem('itemDetail').playlist).creator
+        // };
+        // if(props.playlist.info==undefined){props.playlist.info={}}
+        // if(props.playlist.artist==undefined){props.playlist.artist={}}
+        // console.log(props.creator);
     },
-    props:['playlist','type'],
+    props:['playlist','creator','type'],
     components:{
         musicListIntro
     },
@@ -98,6 +98,14 @@ export default{
 </script>
 
 <style lang="scss" scoped>
+.bgcimg{
+    width: .5rem;
+    border-radius:100%;
+}
+.nickname{
+    margin-left: .1rem;
+    font-size: .25rem;
+}
     .itemMusicTop{
         width: 100%;
         height: 1rem;

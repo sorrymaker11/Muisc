@@ -19,9 +19,9 @@ export default{
     },
     methods:{
         getData:async function(){
-            let data=localStorage.getItem('cookie')
-            let res=await getDayMusic(data);
-            console.log(res);
+            // let data=localStorage.getItem('cookie')
+            let res=await getDayMusic();
+            // console.log(res);
             this.dailySongs=res.data.data.dailySongs
         }
     },

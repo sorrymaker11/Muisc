@@ -1,7 +1,6 @@
 <template>
     <div>
-        <div v-if="!data">加载中</div>
-        <div v-else class="videoContent">
+        <div class="videoContent">
             <div class="videoContentTop">
                 <svg class="icon" aria-hidden="true" @click="$router.go(-1)">
                     <use xlink:href="#icon-fanhuijiantou"></use>
@@ -46,7 +45,8 @@ export default{
     },
     components:{
         Vue3Marquee,
-        videoComment
+        videoComment,
+        
     }
 }
 </script>

@@ -51,6 +51,7 @@ export default{
         align-items: center;
         background-color: #fff;
         top:0;
+        z-index: 9999;
     }
     .TopNav .topContent{
         width: 65%;

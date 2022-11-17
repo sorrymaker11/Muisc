@@ -1,5 +1,6 @@
 <template>
-    <div class="itemListContent">
+    <div>
+        <div class="itemListContent">
             <div class="content" v-for="(item,index) in itemList" :key='index'>
                 <div class="contentLeft" @click="palyMusic(item,index)">
                     <span v-if="updateType==='footer'">{{index+1}}</span>
@@ -21,6 +22,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </template>
 
 <script>
@@ -56,7 +58,7 @@ export default{
                     'updatePlayListIndex',
                     ]),
     },
-     props:['itemList','updateType']
+    props:['itemList','updateType'],
 }
 </script>
 

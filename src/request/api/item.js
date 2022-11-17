@@ -1,9 +1,9 @@
 import service from '..';
 
-export function getMusicItemList(data){
+export function getMusicItemList(data,cookie){
     return service({
         method:'GET',
-        url:`/playlist/detail?id=${data}`
+        url:`/playlist/detail?id=${data}&cookie=${cookie}`
     })
 }
 export function getItemList(data){
@@ -24,5 +24,13 @@ export function getMusicComment(data){
     return service({
         method:'GET',
         url:`/comment/playlist?id=${data}`
+    })
+}
+
+// 收藏歌单
+export function likeMusicList(data){
+    return service({
+        method:'GET',
+        url:`/playlist/subscribe?t=${data.t}&id=${data.id}&cookie=${data.cookie}`
     })
 }

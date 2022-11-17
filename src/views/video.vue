@@ -1,17 +1,19 @@
 <template>
-    <div class="allVideo">
-        <TopNav/>
-        <videoTop :getMvData="getMvData"/>
-        <div v-for="item in data" :key="item.id" class="content" @click="goDetail(item.id,item.name)">
-            <div class="bacImg"><img v-lazy="item.cover" alt="图片加载失败"></div>
-            <div class="desc">{{item.briefDesc||'暂无描述'}}</div>
-            <div class="footer">
-                <div class="footerLeft">
-                    <img v-lazy="item.cover" alt="">
-                    <span class="name">{{item.name}}</span>
-                </div>
-                <div class="footerRight">
-                    <span class="artist">{{item.artistName}}</span>
+    <div>
+        <div class="allVideo">
+            <TopNav/>
+            <videoTop :getMvData="getMvData"/>
+            <div v-for="item in data" :key="item.id" class="content" @click="goDetail(item.id,item.name)">
+                <div class="bacImg"><img v-lazy="item.cover" alt="图片加载失败"></div>
+                <div class="desc">{{item.briefDesc||'暂无描述'}}</div>
+                <div class="footer">
+                    <div class="footerLeft">
+                        <img v-lazy="item.cover" alt="">
+                        <span class="name">{{item.name}}</span>
+                    </div>
+                    <div class="footerRight">
+                        <span class="artist">{{item.artistName}}</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -49,7 +51,7 @@ export default{
     mounted(){
         this.getMvData('全部')
     },
-    components:{videoTop,TopNav}
+    components:{videoTop,TopNav,}
 }
 </script>
 

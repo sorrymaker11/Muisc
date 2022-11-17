@@ -97,9 +97,23 @@ const User={
   }
 }
 
+const Loading={
+  namespaced:true,
+  state:{
+    isLoading:false
+  },
+  mutations:{
+    updateIsLoading(state,value){
+      state.isLoading=value
+    },
+  },
+  actions:{
+  }
+}
 export default createStore({
   modules: {
     musicList,
     User,
+    Loading
   }
 })

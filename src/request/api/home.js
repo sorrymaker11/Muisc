@@ -18,7 +18,7 @@ export function getMusicList(){
 export function getDayMusic(data){
     return service({
         method:'GET',
-        url:`/recommend/songs?cookie=${data}`,
+        url:`/recommend/songs`,
     })
 }
 // 搜索

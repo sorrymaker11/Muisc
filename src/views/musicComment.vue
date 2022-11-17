@@ -16,7 +16,10 @@
                 </svg>
             </div>
         </div>
-        <musicListIntro :playlist='playlist'/>
+        <musicListIntro :playlist='playlist'>
+            <template v-slot:backgroundUrl><img :src="creator.picUrl||creator.avatarUrl" alt="" class="bgcimg"></template>
+            <template v-slot:nickname><span class="nickname">{{creator.name||creator.nickname}}</span></template>
+        </musicListIntro>
         <comment :type='$route.query.type'/>
     </div>
 </template>
@@ -26,11 +29,14 @@ import comment from '@/components/common/comment'
     export default{
         data(){
             return{
-                playlist:{}
+                playlist:{},
+                creator:{}
             }
         },
         created(){
             this.playlist=JSON.parse(sessionStorage.getItem('playlist'))
+            this.creator=this.playlist.artist||this.playlist.creator
+            // console.log(this.playlist);
         },
         components:{
             musicListIntro,comment
@@ -38,6 +44,14 @@ import comment from '@/components/common/comment'
     }
 </script>
 <style scoped>
+.bgcimg{
+    width: .5rem;
+    border-radius:100%;
+}
+.nickname{
+    margin-left: .1rem;
+    font-size: .25rem;
+}
 .itemMusicTop{
         width: 100%;
         height: 1rem;
@@ -52,8 +66,15 @@ import comment from '@/components/common/comment'
          /* padding: .2rem;
         position: relative; */
     }
-.itemLeft{
-    display: flex;
-    align-items: center;
-}
+
+    .itemLeft,.itemRight{
+        width:25%;
+        height: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        font-size: .4rem;
+        margin: 0 10px;
+        color: rgb(239,179,54);
+    }
 </style>
