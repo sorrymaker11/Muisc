@@ -21,7 +21,7 @@ export default{
         getData:async function(){
             // let data=localStorage.getItem('cookie')
             let res=await getDayMusic();
-            // console.log(res);
+            console.log(res);
             this.dailySongs=res.data.data.dailySongs
         }
     },

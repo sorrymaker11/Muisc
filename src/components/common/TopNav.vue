@@ -1,13 +1,13 @@
 <template>
     <div class="TopNav">
         <div class="topleft">
-            <svg class="icon" aria-hidden="true">
+            <svg class="icon" aria-hidden="true" @click="$router.push('/infoUser')">
                 <use xlink:href="#icon-liebiao2"></use>
             </svg>
         </div>
         <div class="topContent">
-            <router-link active-class="active" to='/infoUser'>我的</router-link>
             <router-link active-class="active" to="/">发现</router-link>
+            <router-link active-class="active" to='/ranklist'>排行</router-link>
             <router-link active-class="active" to="/showsinger">歌手</router-link>
             <router-link active-class="active" to='/video'>视频</router-link>
         </div>

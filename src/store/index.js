@@ -77,17 +77,11 @@ const User={
   state:{
     isLogin:false,   //判断是否登录
     showFooter:true,
-    user:{
-      
-    }
   },
   mutations:{
     updateIsLogin(state,value){
       state.isLogin=!state.isLogin
     },
-    updateUser(state,value){
-      state.user=value
-    }
   },
   actions:{
     getLogin:async function (context,val){
@@ -100,12 +94,20 @@ const User={
 const Loading={
   namespaced:true,
   state:{
-    isLoading:false
+    isLoading:false,
+    msg:{
+      isShow:false,
+      showType:'',
+      content:''
+    }
   },
   mutations:{
     updateIsLoading(state,value){
       state.isLoading=value
     },
+    updateContent(state,value){
+      state.msg=value
+    }
   },
   actions:{
   }

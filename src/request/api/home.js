@@ -7,7 +7,7 @@ export  function getBanner(){
         url:'banner?type=2'
     })
 }
-// 获取发现好歌单
+// 获取每日推荐歌单
 export function getMusicList(){
     return service({
         method:'GET',

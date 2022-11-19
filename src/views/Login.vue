@@ -51,13 +51,13 @@ export default{
   methods:{
     Login:async function(){
       let res=await this.$store.dispatch('User/getLogin',{phone:this.phone,password:this.password})
-      console.log(res);
+      // console.log(res);
       if(res.data.code===200){
         this.$store.commit('User/updateIsLogin')
         localStorage.setItem('cookie',res.data.cookie)
-        let result=await getLoginUser(res.data.account.id)
-        localStorage.setItem('user',JSON.stringify(result.data))
-        this.$store.commit('User/updateUser',result.data)
+        // let result=await getLoginUser(res.data.account.id)
+        localStorage.setItem('uid',res.data.account.id)
+        // this.$store.commit('User/updateUser',result.data)
         this.$router.push('/infoUser')
       }else{
         alert(res.data.msg);

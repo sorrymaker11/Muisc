@@ -77,13 +77,19 @@ const routes = [
     name: 'ranklist',
     component: () => import(/* webpackChunkName: "itemMusic" */ '../views/rankList.vue'),
   },
+  //歌单
+  {
+    path: '/allSongList',
+    name: 'allSongList',
+    component: () => import(/* webpackChunkName: "itemMusic" */ '../views/allSongList.vue'),
+  },
   //用户信息页面
   {
     path: '/infoUser',
     name: 'InfoUser',
     beforeEnter(to, from, next) {
       // ||store.state.User.isLogin
-      if(localStorage.getItem('user')){
+      if(localStorage.getItem('cookie')){
         next();
       }else{
         next('/login')

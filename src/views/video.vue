@@ -68,6 +68,8 @@ export default{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-shadow:0 0 20px 0 #cdc6c6;
+    border-radius: .2rem;
 }
 .bacImg img{
     width: 100%;

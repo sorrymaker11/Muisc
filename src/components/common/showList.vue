@@ -49,6 +49,7 @@ img{
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+    color: rgb(254, 209, 81);
 }
 .icon{
     width: .3rem;

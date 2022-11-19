@@ -46,4 +46,20 @@ body{
 a{
   color: black;
 }
+.van-toast__text{
+  color: white;
+}
+.van-toast{
+background-color: rgba(0,0,0,.8);
+width:2rem;
+height: 2rem;
+border-radius: .2rem;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+.van-icon{
+  font-size: .7rem;
+}
 </style>

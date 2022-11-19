@@ -9,11 +9,11 @@
     </div> -->
     <div class="wrapper" v-if="$store.state.Loading.isLoading">
         <div id="Loading">
-        <div class="loader-inner ball-beat">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
+            <div class="loader-inner ball-beat">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
         </div>
     </div>
 </template>
@@ -22,17 +22,25 @@
 </script>
 <style scoped>
 .wrapper {
-    height: 100vh;
+    /* height: 100vh;
     width: 100vw;
-    background-color: white;
+    background-color: white; */
+    /* z-index: 9999999; */
   }
   #Loading {
       top:50% ;
       left:50%;
-      position: absolute;
+      position: fixed;
       -webkit-transform: translateY(-50%) translateX(-50%);
       transform: translateY(-50%) translateX(-50%);
       z-index:100;
+        width: 2rem;
+        height: 2rem;
+        border-radius: .2rem;
+        background-color: rgb(0,0,0,.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
       @-webkit-keyframes ball-beat {
       50% {

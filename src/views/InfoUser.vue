@@ -1,14 +1,15 @@
 <template>
-  <div>
+  <div v-if="!playlist[0]"></div>
+  <div v-else>
     <TopNav/>
-    <img :src="user.playlist[0].creator.backgroundUrl" alt="" class="bgimg">
+    <img :src="playlist[0].creator.backgroundUrl" alt="" class="bgimg">
     <div class="infoUserTop">
-      <img :src="user.playlist[0].creator.avatarUrl" alt="图片加载失败~" class="profileImg">
-      <div class="nickName">{{user.playlist[0].creator.nickname}}</div>
+      <img :src="playlist[0].creator.avatarUrl" alt="图片加载失败~" class="profileImg">
+      <div class="nickName">{{playlist[0].creator.nickname}}</div>
     </div>
     <div>
       <h2 class="ListTop">我的歌单</h2>
-      <showList :playlist="user.playlist"/>
+      <showList :playlist="playlist"/>
     </div>
     <div class="logOut" @click="logOut">退出登录</div>
   </div>
@@ -19,25 +20,30 @@ import { mapState } from 'vuex'
 import showList from '@/components/common/showList.vue';
 import {getLoginOut} from '@/request/api/home'
 import TopNav from "@/components/common/TopNav.vue"
+import {getLoginUser} from '@/request/api/home';
 export default{
   data(){
     return{
-      creator:{},
-      playlist:{}
+      playlist:[],
+      id:null
     }
   },
-  computed:{
-    ...mapState('User',['user'])
-  },
   created(){
-      this.$store.commit('User/updateUser',JSON.parse(localStorage.getItem('user')) )
+      // this.$store.commit('User/updateUser',JSON.parse(localStorage.getItem('user')) )
+    this.id=localStorage.getItem('uid')
+    this.getUserDate()
   },
   methods:{
-    logOut(){
+    logOut:async function(){
+      let res=await getLoginOut(this.id)
       localStorage.removeItem('user')
       localStorage.removeItem('cookie')
       this.$router.push('/login')
     },
+    getUserDate:async function(){
+      let res=await getLoginUser(this.id)
+      this.playlist=res.data.playlist
+    }
   },
   components:{
     showList,TopNav
@@ -80,5 +86,8 @@ export default{
   text-align: center;
   line-height: 1rem;
   margin: 1rem auto 0;
+}
+a{
+  color: white;
 }
 </style>

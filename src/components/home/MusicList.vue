@@ -2,8 +2,7 @@
 <div>
     <div class="musicList">
         <div class="musicTop">
-            <div class="title">发现好歌单</div>
-            <div class="more">查看更多</div>
+            <h3 class="title">日推精选歌单</h3>
         </div>
         <div class="musicContent">
             <showList :playlist="state.musicList" />
@@ -63,7 +62,6 @@ export default{
 .musicList{
     width: 100%;
     height: 5rem;
-    padding: 0.2rem;
 }
 .musicTop{
     width: 100%;
@@ -71,17 +69,6 @@ export default{
     display: flex;
     justify-content: space-between;
     margin-bottom: 0.2rem;
-}
-.title{
-    font-size: 0.4rem;
-    font-weight: 900;
-}
-.more{
-    border:1px solid #ccc;
-    text-align: center;
-    line-height: 0.6rem;
-    padding: 0 0.2rem;
-    border-radius:0.4rem ;
 }
 .musicContent{
     width: 100%;

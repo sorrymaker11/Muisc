@@ -12,9 +12,11 @@
                     <span>(共{{itemList.length}}首)</span>
                 </div>
             </div>
-            <div class="topRight" @click="like({t:1,id:$route.query.id})">
-                <span v-if="!liked"> +收藏({{changeCount(subscribedCount)}})</span>
-                <span v-else>已收藏</span>
+            <div class="topRight" @click="like({t:1,id:$route.query.id})" v-if="!liked">
+                <span> +收藏({{changeCount(subscribedCount)}})</span>
+            </div>
+            <div class="topRight" @click="like({t:2,id:$route.query.id})" v-else>
+                <span>已收藏</span>
             </div>
         </div>
         <MusicListDetail :itemList='itemList' :updateType="'all'" />
@@ -22,27 +24,27 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { useStore } from "vuex"
 import MusicListDetail from '@/components/common/MusicListDetail.vue';
 import {likeMusicList} from'@/request/api/item'
+import { Toast } from "vant"
 export default{
     setup(props){
+        const store =useStore()
         function changeCount(num){
             if(num>=100000000) return (num/100000000).toFixed(1)+'亿'
             else if(num>=10000) return (num/10000).toFixed(1)+'万'
             else return num
         };
         let like=async function(data){
-            data.cookie=localStorage.getItem('cookie')
             let res=await likeMusicList(data)
-            
+            if(res.data.code==200){
+                Toast.success('成功');
+            }
         }
         return {changeCount,like}
     },
     props:['itemList','subscribedCount','liked'],
-    methods:{
-        ...mapMutations('musicList',['updatePlayList','updatePlayListIndex']),
-    },
     components:{
         MusicListDetail
     }

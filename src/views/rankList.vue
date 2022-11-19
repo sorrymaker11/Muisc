@@ -2,7 +2,7 @@
 <div>
     <div>
         <TopNav/>
-        <div class="rankList">
+        <div class="rankList" v-if="recommend[0]">
             <div class="recommendRankList">
                 <h3 class="rankTitle">榜单推荐</h3>
                 <rankList :rank='recommend'/>

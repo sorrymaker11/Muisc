@@ -32,7 +32,7 @@
 }
 .rankItem{
     position: relative;
-    margin: .2rem .15rem ;
+    margin: .2rem .35rem .2rem 0;
 }
 .rank img{
     width: 2rem;

@@ -10,6 +10,7 @@ let service=axios.create({
 service.interceptors.request.use(function(config) {
   store.commit('Loading/updateIsLoading',true)
   const cookie=localStorage.getItem('cookie');
+  // console.log(cookie);
   //判断请求的类型：如果是post请求就把默认参数拼到data里面；如果是get请求就拼到params里面
   if (config.method === 'post') {
       config.data = {

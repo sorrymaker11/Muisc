@@ -1,6 +1,6 @@
 <template>
 <div>
-    <loading v-if="!state.playList.commentCount"/>
+    <loading v-if="!state.playList.creator" />
     <div v-else>
         <ItemMusicTop :playlist="state.playList" :creator='state.playList.creator' :type="'3'">
             <template v-slot:commentCount><span>{{changeCount(state.playList.commentCount)}}</span></template>
@@ -17,6 +17,7 @@ import {reactive,onMounted} from 'vue';
 import {getMusicItemList,getItemList} from '@/request/api/item';
 import ItemMusicTop from '@/components/item/ItemMusicTop';
 import ItemMusicList from '@/components/item/ItemMusicList';
+import Loading from '../components/common/loading.vue';
 export default{
     setup(){
         const state=reactive({
@@ -32,10 +33,10 @@ export default{
         }
         onMounted(async()=>{
             let id=useRoute().query.id
-            let cookie=localStorage.getItem('cookie')
-            let res=await getMusicItemList(id,cookie);
+            let res=await getMusicItemList(id);
             state.playList=res.data.playlist
             state.liked=res.data.playlist.subscribed
+            // console.log(res);
 
             // 获取歌单的歌曲
             let result=await getItemList(id)
@@ -48,6 +49,7 @@ export default{
     },
     components:{
         ItemMusicTop,ItemMusicList,
+        Loading,
     },
 }
 </script>
