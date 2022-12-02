@@ -20,7 +20,7 @@
 </template>
 <script>
 export default{
-    created(){    
+    mounted(){    
         window.addEventListener('scroll',this.getScroll)
     },
     methods:{
@@ -37,6 +37,7 @@ export default{
     },
     beforeUnmount(){
         window.removeEventListener('scroll',this.getScroll)
+        this.getScroll=null
     }
 }
 </script>

@@ -62,8 +62,14 @@
                 <span>{{changTime(duration)}}</span>
             </div>
             <div class="footerBottom">
-                <svg class="icon" aria-hidden="true">
+                <svg class="icon" aria-hidden="true" @click="changeplayType(2)" v-show="playType===0">
                     <use xlink:href="#icon-xunhuanbofang"></use>
+                </svg>
+                <svg class="icon" aria-hidden="true" @click="changeplayType(0)" v-show="playType===1">
+                    <use xlink:href="#icon-liebiaoxunhuan"></use>
+                </svg>
+                <svg class="icon" aria-hidden="true" @click="changeplayType(1)" v-show="playType===2">
+                    <use xlink:href="#icon-suijibofang01"></use>
                 </svg>
                 <svg class="icon" aria-hidden="true" @click="goPlay(-1)">
                     <use xlink:href="#icon-shangyishou"></use>
@@ -89,10 +95,12 @@
 import {Vue3Marquee} from 'vue3-marquee'
 import 'vue3-marquee/dist/style.css'
 import { mapMutations,mapState } from 'vuex';
+import { Toast } from "vant"
 export default{
     data(){
         return{
             isLyricShow:false,
+            playType:1
         }
     },
     computed:{
@@ -124,6 +132,7 @@ export default{
                 return this.$store.state.musicList.currentTime
             },
             set(value){
+                // console.log(value)
                 return this.$store.commit('musicList/updateCurrentTime',value)
             }
         },
@@ -136,10 +145,13 @@ export default{
     },
     methods:{
         goPlay(num){
-            let newIndex=this.playListIndex+num
-            if(newIndex<0)  newIndex=this.playList.length-1
-            else if(newIndex===this.playList.length)  newIndex=0
-            this.updatePlayListIndex(newIndex)
+            // if(num===0) {this.currentTime=0;console.log(this.currentTime);}
+            // else{
+                let newIndex=this.playListIndex+num
+                if(newIndex<0)  newIndex=this.playList.length-1
+                else if(newIndex>=this.playList.length)  newIndex=0
+                this.updatePlayListIndex(newIndex)
+            // }
         },
         //将当前时间和总时间的秒数转化为0:00的形式
         changTime(val){
@@ -150,16 +162,33 @@ export default{
                 return (parseInt(val/60)+':'+msec)
             }
         },
+        changeplayType(type){
+            this.playType=type
+            let content=null
+            if(type===0) content='单曲循环'
+            else if(type===1) content='列表循环'
+            else content='随机播放'
+            Toast(content);
+        },
         ...mapMutations('musicList',['updateDetailShow','updatePlayListIndex','updateCurrentTime'])
     },
     watch:{
         currentTime(newVal){
             let p=document.querySelector('.active')
+            // if(newVal-oldVal>3||newVal-oldVal<-3) this.$refs.audio.currentTime=newVal
             if(p&&p.offsetTop>300){
                 this.$refs.musicLyric.scrollTop=p.offsetTop-300
             }
             if(newVal===this.duration){
-                this.goPlay(1)
+                if(this.playType==0){
+                    this.currentTime=0
+                    this.play()
+                }
+                else if(this.playType==1){
+                    this.goPlay(1)
+                    // console.log(this.playType)
+                }
+                else this.goPlay(Math.ceil(Math.random()*this.playList.length))
             } 
         }
         // this.$refs.range.value
@@ -301,8 +330,8 @@ export default{
     justify-content: space-around;
     align-items: center;
 }
-.footerBottom .icon:nth-child(3){
-    width: .8rem;
-    height: .8rem;
-}
+// .footerBottom .icon:nth-child(3){
+//     width: .8rem;
+//     height: .8rem;
+// }
 </style>
